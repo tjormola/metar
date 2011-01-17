@@ -13,12 +13,14 @@
    [3]LuaSocket is required for fetching weather reports from the
    [4]Internet Weather Service.
 
+   My [5]Lua weather library is required for doing some unit conversions.
+
                                   Downloading
 
-   METAR parser home page is at [5]http://solitudo.net/software/lua/metar/
+   METAR parser home page is at [6]http://solitudo.net/software/lua/metar/
    and it can be downloaded from the public Git repository at
    git://scm.solitudo.net/metar.git. Gitweb interface is available at
-   [6]http://scm.solitudo.net/gitweb/public/metar.git.
+   [7]http://scm.solitudo.net/gitweb/public/metar.git.
 
    Remember to download the submodules after cloning metar.git.
     1. $ git submodule init
@@ -29,7 +31,7 @@
    Install the src/metar.lua under some of the directories included in the
    default LUA_PATH for your Lua distribution, or install under desired
    location and set LUA_PATH accordingly. More info about LUA_PATH at
-   [7]http://www.lua.org/pil/8.1.html.
+   [8]http://www.lua.org/pil/8.1.html.
 
                                API Documentation
 
@@ -39,19 +41,19 @@
                                    References
 
    The following material was used when researching METAR
-     * [8]Federal Meteorological Handbook No. 1 - Surface Weather
+     * [9]Federal Meteorological Handbook No. 1 - Surface Weather
        Observations and Reports
-     * [9]Metar codes by Richard Ogley
-     * [10]Meteorology @ West Moors - Metar decode
-     * Source code of [11]libgweather
-     * Source code of [12]Metar
+     * [10]Metar codes by Richard Ogley
+     * [11]Meteorology @ West Moors - Metar decode
+     * Source code of [12]libgweather
+     * Source code of [13]Metar
 
                             Copyright and licensing
 
-   Copyright: © 2010 Tuomas Jormola [13]tj@solitudo.net
-   [14]http://solitudo.net
+   Copyright: © 2010 Tuomas Jormola [14]tj@solitudo.net
+   [15]http://solitudo.net
 
-   Licensed under the terms of the [15]GNU General Public License Version
+   Licensed under the terms of the [16]GNU General Public License Version
    2.0. License terms are included in the file COPYING.
 
 References
@@ -60,14 +62,15 @@ References
    2. http://weather.noaa.gov/
    3. http://www.cs.princeton.edu/~diego/professional/luasocket/
    4. http://weather.noaa.gov/
-   5. http://solitudo.net/software/lua/metar/
-   6. http://scm.solitudo.net/gitweb/public/metar.git
-   7. http://www.lua.org/pil/8.1.html
-   8. http://www.ofcm.gov/fmh-1/fmh1.htm
-   9. http://www.astro.keele.ac.uk/oldusers/rno/Aviation/metar_codes.html
-  10. http://booty.org.uk/booty.weather/metinfo/codes/METAR_decode.htm
-  11. http://ftp.gnome.org/pub/GNOME/sources/libgweather/
-  12. http://www.leune.org/metar/
-  13. mailto:tj@solitudo.net
-  14. http://solitudo.net/
-  15. http://www.gnu.org/licenses/gpl-2.0.html
+   5. http://solitudo.net/software/lua/weatherlib/
+   6. http://solitudo.net/software/lua/metar/
+   7. http://scm.solitudo.net/gitweb/public/metar.git
+   8. http://www.lua.org/pil/8.1.html
+   9. http://www.ofcm.gov/fmh-1/fmh1.htm
+  10. http://www.astro.keele.ac.uk/oldusers/rno/Aviation/metar_codes.html
+  11. http://booty.org.uk/booty.weather/metinfo/codes/METAR_decode.htm
+  12. http://ftp.gnome.org/pub/GNOME/sources/libgweather/
+  13. http://www.leune.org/metar/
+  14. mailto:tj@solitudo.net
+  15. http://solitudo.net/
+  16. http://www.gnu.org/licenses/gpl-2.0.html
