@@ -1,0 +1,57 @@
+# Lua METAR parser
+
+This library can be used to parse METAR coded weather reports
+and fetch current METAR reports from [NOAA](http://www.noaa.gov)
+[Internet Weather Service](http://weather.noaa.gov) in Lua.
+
+The parser is pretty simple and by no means claims to support every feature one
+might find in METAR coded weather reports. For example, weather forecasts and
+automatic weather reports are not detected. Unsupported features in
+the weather reports are silently dropped.
+
+# Dependencies
+
+[LuaSocket](http://www.cs.princeton.edu/~diego/professional/luasocket/) is
+required for fetching weather reports from the [Internet Weather Service](http://weather.noaa.gov).
+
+# Downloading
+
+METAR parser home page is at
+<http://solitudo.net/software/lua/metar/> and it can be downloaded
+from the public Git repository at `git://scm.solitudo.net/metar.git`.
+Gitweb interface is available at
+<http://scm.solitudo.net/gitweb/public/metar.git>.
+
+Remember to download the submodules after cloning `metar.git`.
+
+1. $ `git submodule init`
+1. $ `git submodule update`
+
+# Installation
+
+Install the `src/metar.lua` under some of the directories included in the
+default `LUA_PATH` for your Lua distribution, or install under desired location
+and set `LUA_PATH` accordingly. More info about `LUA_PATH` at
+<http://www.lua.org/pil/8.1.html>.
+
+# API Documentation
+
+API documentation for `metar` is available under the `api/` directory of
+the distribution.
+
+# References
+
+The following material was used when researching METAR
+
+* [Federal Meteorological Handbook No. 1 - Surface Weather Observations and Reports](http://www.ofcm.gov/fmh-1/fmh1.htm)
+* [Metar codes by Richard Ogley](http://www.astro.keele.ac.uk/oldusers/rno/Aviation/metar_codes.html)
+* [Meteorology @ West Moors - Metar decode](http://booty.org.uk/booty.weather/metinfo/codes/METAR_decode.htm)
+* Source code of [libgweather](http://ftp.gnome.org/pub/GNOME/sources/libgweather/)
+* Source code of [Metar](http://www.leune.org/metar/)
+
+# Copyright and licensing
+
+Copyright: © 2010 Tuomas Jormola <tj@solitudo.net> <http://solitudo.net>
+
+Licensed under the terms of the [GNU General Public License Version 2.0](http://www.gnu.org/licenses/gpl-2.0.html).
+License terms are included in the file `COPYING`.
