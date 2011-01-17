@@ -1,0 +1,330 @@
+[[!meta title="LuaDoc - metar.lua"]]
+
+<div id="luadoc" markdown="1">
+
+[[Jump to content|ikiwiki/files/metar.lua#luadoc-content"]]
+
+# LuaDoc
+
+
+* [[Index|ikiwiki]]
+
+
+
+# Modules
+
+* [[metar|ikiwiki/modules/metar]]
+
+
+
+
+# Files
+
+* **metar.lua**
+
+
+
+
+---
+
+<span id="luadoc-content" />
+
+# File `metar.lua`
+
+
+Lua class to parse METAR coded weather reports and fetch current METAR reports from <a href="http://www.noaa.gov">NOAA</a> <a href="http://weather.noaa.gov">Internet Weather Service</a>. The parser is pretty simple and by no means claims to support every feature one might find in METAR coded weather reports. For example, weather forecasts and automatic weather reports are not detected. Unsupported features in the weather reports are silently dropped.
+
+
+
+**Author:**
+
+* Tuomas Jormola
+
+
+
+
+Copyright: © 2010 Tuomas Jormola <a href="mailto:tj@solitudo.net">tj@solitudo.net</a> <a href="http://solitudo.net">http://solitudo.net</a> Licensed under the terms of the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License Version 2.0</a>.  
+
+
+
+
+
+## Functions summary
+
+| - | - |
+
+| [[`metatable.__index:get_metar_data`|ikiwiki/files/metar.lua#luadoc-function-metatable.__index:get_metar_data]] `(`*``*`)` | Return parsed METAR data as a table  |
+
+| [[`new`|ikiwiki/files/metar.lua#luadoc-function-new]] `(`*`args`*`)` | Create a new METAR object  |
+
+
+
+
+## Tables summary
+
+| - | - |
+| [[`CLOUD_COVERAGE`|ikiwiki/files/metar.lua#luadoc-table-CLOUD_COVERAGE]] | Could coverage table. |
+| [[`CLOUD_TYPE`|ikiwiki/files/metar.lua#luadoc-table-CLOUD_TYPE]] | Could type table. |
+| [[`SKY_STATUS`|ikiwiki/files/metar.lua#luadoc-table-SKY_STATUS]] | Could type table. |
+| [[`WEATHER_DESCRIPTOR`|ikiwiki/files/metar.lua#luadoc-table-WEATHER_DESCRIPTOR]] | Weather descriptor table. |
+| [[`WEATHER_INTENSITY`|ikiwiki/files/metar.lua#luadoc-table-WEATHER_INTENSITY]] | Weather intensity table. |
+| [[`WEATHER_PHENOMENA`|ikiwiki/files/metar.lua#luadoc-table-WEATHER_PHENOMENA]] | Weather phenomena table. |
+| [[`WIND_DIRECTION`|ikiwiki/files/metar.lua#luadoc-table-WIND_DIRECTION]] | Wind direction table. |
+
+
+
+
+## Functions
+
+---
+
+<span id="luadoc-function-metatable.__index:get_metar_data" />
+
+### metatable.__index:get_metar_data ()
+
+
+Return parsed METAR data as a table
+
+
+
+
+
+**Usage**
+
+* `var m = metar.new('EFHF')          -- Weather station Helsinki/Malmi`
+* `var md = m:get_metar_data()        -- metardata.temperature contains the temperature etc.`
+* `if md.temperature >= 30 then print("It's hot!") end`
+* `if md.weather.intensity and md.weather.intensity == m.WEATHER_INTENSITY.HEAVY and md.weather.phenomena and md.weather.phenomena == m.WEATHER_PHENOMENA.RAIN then print("It's raining a lot!") end`
+
+
+
+
+**Return values:**
+
+1. Table containing the data parsed from the METAR data. If an error occurs, returns nil as the first return value. The table may contain following entries <ul> <li><code>timestamp</code> <code>os.time</code> table which represents the timestamp when the METAR data was generated. Time is in UTC. Always included.</li> <li><code>wind</code> A table representing the wind phenomena with the following keys. Optional, but usually included.</li> <ul> <li><code>direction</code> Wind direction as a value of the <a href="#WIND_DIRECTION">WIND_DIRECTION</a> table.</li> <li><code>speed</code> Wind speed in knots.</li> <li><code>gust</code> Gust speed in knots, optional.</li> </ul> <li><code>visibility</code> A list of tables that represent the visibility towards different directions. Tables contain the following keys. Optional, but if defined, at least one visibility entry exists in the list. Usually included.</li> <ul> <li><code>direction</code> Direction as a value of the <a href="#WIND_DIRECTION">WIND_DIRECTION</a> table. Optional.</li> <li><code>distance</code> Visibility distance in meters</li> </ul> <li><code>vertical_visibility</code> Vertical visibility in meters. Optional.</li> <li><code>runway_visual_range</code> A table representing runway visual range with the following keys. Optional.</li> <ul> <li><code>runway</code> Runway code</li> <li><code>visibility</code> Visibility in meters</li> </ul> <li><code>clouds</code> A list of tables that represent clouds at different altitudes. Tables contain the following keys. Optional, but if defined, at least one cloud entry exists in the list. Usually included.</li> <ul> <li><code>coverage</code> Cloud coverate as a value of the <a href="#CLOUD_COVERAGE">CLOUD_COVERAGE</a> table.</li> <li><code>altitude</code> Altitude of the clouds in feet.</li> <li><code>type</code> Cloud type as a value of the <a href="#CLOUD_TYPE">CLOUD_TYPE</a> table.</li> </ul> <li><code>weather</code> A table representing weather conditions with the following keys. Optional, but usually included.</li> <ul> <li><code>intensity</code> Weather intensity as a value of the <a href="#WEATHER_INTENSITY">WEATHER_INTENSITY</a> table. Optional.</li></li> <li><code>descriptor</code> Weather descriptor as a value of the <a href="#WEATHER_DESCRIPTOR">WEATHER_DESCRIPTOR</a> table. Optional.</li> <li><code>phenomena</code> Weather phenomena as a value of the <a href="#WEATHER_PHENOMENA">WEATHER_PHENOMENA</a> table. Always included.</li> </ul> <li><code>sky</code> Sky status as a value of the <a href="#SKY_STATUS">SKY_STATUS</a> table. Always included.</li> <li><code>temperature</code> Temperature in Celcius. Always  included.</li> <li><code>dewpoint</code> Dewpoint temperature in Celcius. Always included.</li> <li><code>pressure</code> Pressure in hectopascals. Optional, but usually included.</li> </ul>
+1. Error string in case an error occurred and nil METAR table is returned
+
+
+
+
+
+
+---
+
+<span id="luadoc-function-new" />
+
+### new (args)
+
+
+Create a new METAR object
+
+
+
+**Parameters**
+
+* `args`: String that is either the METAR data string (one line) to parse or the four-letter, upper-case <a href="http://en.wikipedia.org/wiki/International_Civil_Aviation_Organization_airport_code">ICAO code</a> for the weather station. If weather station code is given, the current METAR data for the station is downloaded from <a href="http://weather.noaa.gov">IWS</a>.
+
+
+
+
+
+
+**Return value:**
+
+A table which is the metar object for METAR data given or downloaded from IWS for the given weather station code
+
+
+
+
+
+
+
+
+## Tables
+
+---
+
+<span id="luadoc-table-CLOUD_COVERAGE" />
+
+### CLOUD_COVERAGE
+
+
+Could coverage table. Values from this table are used in the result table with key <code>clouds[n].coverage</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `CLEAR`: Clear
+* `FEW`: Few clouds
+* `SCATTERED`: Scattered clouds
+* `BROKEN_SKY`: Broken sky
+* `OVERCAST`: Overcast
+
+
+
+
+---
+
+<span id="luadoc-table-CLOUD_TYPE" />
+
+### CLOUD_TYPE
+
+
+Could type table. Values from this table are used in the result table with key <code>clouds[n].type</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `CUMULONIMBUS`: Cumulonimbus clouds
+* `TOWERING_CUMULUS`: Towering Cumulus clouds
+
+
+
+
+---
+
+<span id="luadoc-table-SKY_STATUS" />
+
+### SKY_STATUS
+
+
+Could type table. Values from this table are used in the result table with key <code>sky</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `UNKNOWN`: Sky type is unknown
+* `OBSCURE`: Obscured sky
+* `CLOUDS`: Clouds in the sky
+* `CLEAR`: Clear sky
+* `NO_SIGNIFICANT_CLOUDS`: No significant clouds detected
+* `NO_CLOUDS_DETECTED`: No clouds detected
+
+
+
+
+---
+
+<span id="luadoc-table-WEATHER_DESCRIPTOR" />
+
+### WEATHER_DESCRIPTOR
+
+
+Weather descriptor table. Values from this table are used in the result table with key <code>weather.descriptor</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `SHALLOW`: Shallow phenomena
+* `PARTIAL`: Partial phenomena
+* `PATCHES`: Patches phenomena
+* `DRIFTING`: Drifring phenomena
+* `BLOWING`: Blowing phenomena
+* `SHOWERS`: Showers phenomena
+* `THUNDERSTORM`: Thunderstorm phenomena
+* `FREEZING`: Freezing phenomena
+
+
+
+
+---
+
+<span id="luadoc-table-WEATHER_INTENSITY" />
+
+### WEATHER_INTENSITY
+
+
+Weather intensity table. Values from this table are used in the result table with key <code>weather.intensity</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `MODERATE`: Moderate phenomena
+* `LIGHT`: Light phenomena
+* `HEAVY`: Heavy phenomena
+* `VICINITY`: In the vicinity of the weather observation point
+
+
+
+
+---
+
+<span id="luadoc-table-WEATHER_PHENOMENA" />
+
+### WEATHER_PHENOMENA
+
+
+Weather phenomena table. Values from this table are used in the result table with key <code>weather.phenomena</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `DRIZZLE`: Drizzle
+* `RAIN`: Rain
+* `SNOW`: Snow
+* `SNOW_GRAINS`: Snow grains
+* `ICE_CRYSTALS`: Ice crystals
+* `ICE_PELLETS`: Ice pellets
+* `HAIL`: Hail
+* `SMALL_HAIL`: Small hail
+* `UNKNOWN`: Unknown phenomena
+* `MIST`: Mist
+* `FOG`: Fog
+* `SMOKE`: Smoke
+* `VOLCANIC_ASH`: Volcanic ash
+* `WIDESPREAD_DUST`: Widespread dust
+* `SAND`: Sand
+* `HAZE`: Haze
+* `SPRAY`: Spray
+* `DUST_WHIRLS`: Dust whirls
+* `SQUALLS`: Squalls
+* `FUNNEL_CLOUD`: Funnel cloud
+* `SAND_STORM`: Sand storm
+* `DUST_STORM`: Dust storm
+
+
+
+
+---
+
+<span id="luadoc-table-WIND_DIRECTION" />
+
+### WIND_DIRECTION
+
+
+Wind direction table. Values from this table are used in the result table with key <code>wind.direction</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+
+**Fields**
+
+* `VRB`: Index value for variable speed direction
+* `N`: Index value for North
+* `NNE`: Index value for North - North East
+* `NE`: Index value for Nort - East
+* `ENE`: Index value for East - North East
+* `E`: Index value for East
+* `ESE`: Index value for East - South East
+* `SE`: Index value for South East
+* `SSE`: Index value for South - South Est
+* `S`: Index value for South
+* `SSW`: Index value for South - South West
+* `SW`: Index value for South West
+* `WSW`: Index value for West - South West
+* `W`: Index value for West
+* `WNW`: Index value for West - North West
+* `NW`: Index value for North West
+* `NNW`: Index value for North - North West
+
+
+
+
+
+
+</div>

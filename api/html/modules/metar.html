@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li><strong>metar</strong></li>
+	
+</ul>
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/metar.html">metar.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>metar</code></h1>
+
+<p>Lua class to parse METAR coded weather reports and fetch current METAR reports from <a href="http://www.noaa.gov">NOAA</a> <a href="http://weather.noaa.gov">Internet Weather Service</a>. The parser is pretty simple and by no means claims to support every feature one might find in METAR coded weather reports. For example, weather forecasts and automatic weather reports are not detected. Unsupported features in the weather reports are silently dropped.</p>
+
+<p><b>Author:</b>
+<table class="authors_list">
+
+	<tr><td class="name">Tuomas Jormola</td></tr>
+
+</table>
+</p>
+
+
+<p>Copyright&copy; © 2010 Tuomas Jormola <a href="mailto:tj@solitudo.net">tj@solitudo.net</a> <a href="http://solitudo.net">http://solitudo.net</a> Licensed under the terms of the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License Version 2.0</a>.  </p>
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#metatable.__index:get_metar_data">metatable.__index:get_metar_data</a>&nbsp;()</td>
+	<td class="summary">Return parsed METAR data as a table </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#new">new</a>&nbsp;(args)</td>
+	<td class="summary">Create a new METAR object </td>
+	</tr>
+
+</table>
+
+
+
+
+<h2>Tables</h2>
+<table class="table_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#CLOUD_COVERAGE">CLOUD_COVERAGE</a></td>
+	<td class="summary">Could coverage table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CLOUD_TYPE">CLOUD_TYPE</a></td>
+	<td class="summary">Could type table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#SKY_STATUS">SKY_STATUS</a></td>
+	<td class="summary">Could type table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#WEATHER_DESCRIPTOR">WEATHER_DESCRIPTOR</a></td>
+	<td class="summary">Weather descriptor table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#WEATHER_INTENSITY">WEATHER_INTENSITY</a></td>
+	<td class="summary">Weather intensity table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#WEATHER_PHENOMENA">WEATHER_PHENOMENA</a></td>
+	<td class="summary">Weather phenomena table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#WIND_DIRECTION">WIND_DIRECTION</a></td>
+	<td class="summary">Wind direction table.</td>
+	</tr>
+
+</table>
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="metatable.__index:get_metar_data"></a><strong>metatable.__index:get_metar_data</strong>&nbsp;()</dt>
+<dd>
+Return parsed METAR data as a table
+
+
+
+
+
+<h3>Usage</h3>
+<ul>
+	
+	<li>var m = metar.new('EFHF')          -- Weather station Helsinki/Malmi
+	
+	<li>var md = m:get_metar_data()        -- metardata.temperature contains the temperature etc.
+	
+	<li>if md.temperature >= 30 then print("It's hot!") end
+	
+	<li>if md.weather.intensity and md.weather.intensity == m.WEATHER_INTENSITY.HEAVY and md.weather.phenomena and md.weather.phenomena == m.WEATHER_PHENOMENA.RAIN then print("It's raining a lot!") end
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>Table containing the data parsed from the METAR data. If an error occurs, returns nil as the first return value. The table may contain following entries <ul> <li><code>timestamp</code> <code>os.time</code> table which represents the timestamp when the METAR data was generated. Time is in UTC. Always included.</li> <li><code>wind</code> A table representing the wind phenomena with the following keys. Optional, but usually included.</li> <ul> <li><code>direction</code> Wind direction as a value of the <a href="#WIND_DIRECTION">WIND_DIRECTION</a> table.</li> <li><code>speed</code> Wind speed in knots.</li> <li><code>gust</code> Gust speed in knots, optional.</li> </ul> <li><code>visibility</code> A list of tables that represent the visibility towards different directions. Tables contain the following keys. Optional, but if defined, at least one visibility entry exists in the list. Usually included.</li> <ul> <li><code>direction</code> Direction as a value of the <a href="#WIND_DIRECTION">WIND_DIRECTION</a> table. Optional.</li> <li><code>distance</code> Visibility distance in meters</li> </ul> <li><code>vertical_visibility</code> Vertical visibility in meters. Optional.</li> <li><code>runway_visual_range</code> A table representing runway visual range with the following keys. Optional.</li> <ul> <li><code>runway</code> Runway code</li> <li><code>visibility</code> Visibility in meters</li> </ul> <li><code>clouds</code> A list of tables that represent clouds at different altitudes. Tables contain the following keys. Optional, but if defined, at least one cloud entry exists in the list. Usually included.</li> <ul> <li><code>coverage</code> Cloud coverate as a value of the <a href="#CLOUD_COVERAGE">CLOUD_COVERAGE</a> table.</li> <li><code>altitude</code> Altitude of the clouds in feet.</li> <li><code>type</code> Cloud type as a value of the <a href="#CLOUD_TYPE">CLOUD_TYPE</a> table.</li> </ul> <li><code>weather</code> A table representing weather conditions with the following keys. Optional, but usually included.</li> <ul> <li><code>intensity</code> Weather intensity as a value of the <a href="#WEATHER_INTENSITY">WEATHER_INTENSITY</a> table. Optional.</li></li> <li><code>descriptor</code> Weather descriptor as a value of the <a href="#WEATHER_DESCRIPTOR">WEATHER_DESCRIPTOR</a> table. Optional.</li> <li><code>phenomena</code> Weather phenomena as a value of the <a href="#WEATHER_PHENOMENA">WEATHER_PHENOMENA</a> table. Always included.</li> </ul> <li><code>sky</code> Sky status as a value of the <a href="#SKY_STATUS">SKY_STATUS</a> table. Always included.</li> <li><code>temperature</code> Temperature in Celcius. Always  included.</li> <li><code>dewpoint</code> Dewpoint temperature in Celcius. Always included.</li> <li><code>pressure</code> Pressure in hectopascals. Optional, but usually included.</li> </ul>
+	
+	<li>Error string in case an error occurred and nil METAR table is returned
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="new"></a><strong>new</strong>&nbsp;(args)</dt>
+<dd>
+Create a new METAR object
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  args: String that is either the METAR data string (one line) to parse or the four-letter, upper-case <a href="http://en.wikipedia.org/wiki/International_Civil_Aviation_Organization_airport_code">ICAO code</a> for the weather station. If weather station code is given, the current METAR data for the station is downloaded from <a href="http://weather.noaa.gov">IWS</a>.
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+A table which is the metar object for METAR data given or downloaded from IWS for the given weather station code
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+<h2><a name="tables"></a>Tables</h2>
+<dl class="table">
+
+<dt><a name="CLOUD_COVERAGE"></a><strong>CLOUD_COVERAGE</strong></dt>
+<dd>Could coverage table. Values from this table are used in the result table with key <code>clouds[n].coverage</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  CLEAR: Clear
+	</li>
+	
+	<li>
+	  FEW: Few clouds
+	</li>
+	
+	<li>
+	  SCATTERED: Scattered clouds
+	</li>
+	
+	<li>
+	  BROKEN_SKY: Broken sky
+	</li>
+	
+	<li>
+	  OVERCAST: Overcast
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="CLOUD_TYPE"></a><strong>CLOUD_TYPE</strong></dt>
+<dd>Could type table. Values from this table are used in the result table with key <code>clouds[n].type</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  CUMULONIMBUS: Cumulonimbus clouds
+	</li>
+	
+	<li>
+	  TOWERING_CUMULUS: Towering Cumulus clouds
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="SKY_STATUS"></a><strong>SKY_STATUS</strong></dt>
+<dd>Could type table. Values from this table are used in the result table with key <code>sky</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  UNKNOWN: Sky type is unknown
+	</li>
+	
+	<li>
+	  OBSCURE: Obscured sky
+	</li>
+	
+	<li>
+	  CLOUDS: Clouds in the sky
+	</li>
+	
+	<li>
+	  CLEAR: Clear sky
+	</li>
+	
+	<li>
+	  NO_SIGNIFICANT_CLOUDS: No significant clouds detected
+	</li>
+	
+	<li>
+	  NO_CLOUDS_DETECTED: No clouds detected
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="WEATHER_DESCRIPTOR"></a><strong>WEATHER_DESCRIPTOR</strong></dt>
+<dd>Weather descriptor table. Values from this table are used in the result table with key <code>weather.descriptor</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  SHALLOW: Shallow phenomena
+	</li>
+	
+	<li>
+	  PARTIAL: Partial phenomena
+	</li>
+	
+	<li>
+	  PATCHES: Patches phenomena
+	</li>
+	
+	<li>
+	  DRIFTING: Drifring phenomena
+	</li>
+	
+	<li>
+	  BLOWING: Blowing phenomena
+	</li>
+	
+	<li>
+	  SHOWERS: Showers phenomena
+	</li>
+	
+	<li>
+	  THUNDERSTORM: Thunderstorm phenomena
+	</li>
+	
+	<li>
+	  FREEZING: Freezing phenomena
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="WEATHER_INTENSITY"></a><strong>WEATHER_INTENSITY</strong></dt>
+<dd>Weather intensity table. Values from this table are used in the result table with key <code>weather.intensity</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  MODERATE: Moderate phenomena
+	</li>
+	
+	<li>
+	  LIGHT: Light phenomena
+	</li>
+	
+	<li>
+	  HEAVY: Heavy phenomena
+	</li>
+	
+	<li>
+	  VICINITY: In the vicinity of the weather observation point
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="WEATHER_PHENOMENA"></a><strong>WEATHER_PHENOMENA</strong></dt>
+<dd>Weather phenomena table. Values from this table are used in the result table with key <code>weather.phenomena</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  DRIZZLE: Drizzle
+	</li>
+	
+	<li>
+	  RAIN: Rain
+	</li>
+	
+	<li>
+	  SNOW: Snow
+	</li>
+	
+	<li>
+	  SNOW_GRAINS: Snow grains
+	</li>
+	
+	<li>
+	  ICE_CRYSTALS: Ice crystals
+	</li>
+	
+	<li>
+	  ICE_PELLETS: Ice pellets
+	</li>
+	
+	<li>
+	  HAIL: Hail
+	</li>
+	
+	<li>
+	  SMALL_HAIL: Small hail
+	</li>
+	
+	<li>
+	  UNKNOWN: Unknown phenomena
+	</li>
+	
+	<li>
+	  MIST: Mist
+	</li>
+	
+	<li>
+	  FOG: Fog
+	</li>
+	
+	<li>
+	  SMOKE: Smoke
+	</li>
+	
+	<li>
+	  VOLCANIC_ASH: Volcanic ash
+	</li>
+	
+	<li>
+	  WIDESPREAD_DUST: Widespread dust
+	</li>
+	
+	<li>
+	  SAND: Sand
+	</li>
+	
+	<li>
+	  HAZE: Haze
+	</li>
+	
+	<li>
+	  SPRAY: Spray
+	</li>
+	
+	<li>
+	  DUST_WHIRLS: Dust whirls
+	</li>
+	
+	<li>
+	  SQUALLS: Squalls
+	</li>
+	
+	<li>
+	  FUNNEL_CLOUD: Funnel cloud
+	</li>
+	
+	<li>
+	  SAND_STORM: Sand storm
+	</li>
+	
+	<li>
+	  DUST_STORM: Dust storm
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+<dt><a name="WIND_DIRECTION"></a><strong>WIND_DIRECTION</strong></dt>
+<dd>Wind direction table. Values from this table are used in the result table with key <code>wind.direction</code> returned by <a href="#metatable.__index:get_metar_data"><code>get_metar_data()</code></a>.
+
+
+<em>Fields</em>
+<ul>
+	
+	<li>
+	  VRB: Index value for variable speed direction
+	</li>
+	
+	<li>
+	  N: Index value for North
+	</li>
+	
+	<li>
+	  NNE: Index value for North - North East
+	</li>
+	
+	<li>
+	  NE: Index value for Nort - East
+	</li>
+	
+	<li>
+	  ENE: Index value for East - North East
+	</li>
+	
+	<li>
+	  E: Index value for East
+	</li>
+	
+	<li>
+	  ESE: Index value for East - South East
+	</li>
+	
+	<li>
+	  SE: Index value for South East
+	</li>
+	
+	<li>
+	  SSE: Index value for South - South Est
+	</li>
+	
+	<li>
+	  S: Index value for South
+	</li>
+	
+	<li>
+	  SSW: Index value for South - South West
+	</li>
+	
+	<li>
+	  SW: Index value for South West
+	</li>
+	
+	<li>
+	  WSW: Index value for West - South West
+	</li>
+	
+	<li>
+	  W: Index value for West
+	</li>
+	
+	<li>
+	  WNW: Index value for West - North West
+	</li>
+	
+	<li>
+	  NW: Index value for North West
+	</li>
+	
+	<li>
+	  NNW: Index value for North - North West
+	</li>
+	
+</ul>
+
+
+</dd>
+
+
+</dl>
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

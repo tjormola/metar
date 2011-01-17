@@ -1,0 +1,48 @@
+[[!meta title="LuaDoc"]]
+
+<div id="luadoc" markdown="1">
+
+[[Jump to content|ikiwiki#luadoc-content"]]
+
+# LuaDoc
+
+
+* **Index**
+
+
+
+# Modules
+
+* [[metar|ikiwiki/modules/metar]]
+
+
+
+
+# Files
+
+* [[metar.lua|ikiwiki/files/metar.lua]]
+
+
+
+
+---
+
+<span id="luadoc-content" />
+
+
+## Modules
+
+| - | - |
+| [[metar|ikiwiki/modules/metar]] | Lua class to parse METAR coded weather reports and fetch current METAR reports from <a href="http://www.noaa.gov">NOAA</a> <a href="http://weather.noaa.gov">Internet Weather Service</a>. |
+
+
+
+
+## Files
+
+| - |
+| [[metar.lua|ikiwiki/files/metar.lua]] |
+
+
+
+</div>
