@@ -11,7 +11,8 @@
                                   Dependencies
 
    [3]LuaSocket is required for fetching weather reports from the
-   [4]Internet Weather Service.
+   [4]Internet Weather Service. On Debian/Ubuntu systems you can install
+   the package liblua5.1-socket2 in order to get LuaSocket installed.
 
    My [5]Lua weather library is required for doing some unit conversions.
 
