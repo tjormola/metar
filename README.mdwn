@@ -49,7 +49,7 @@ The following material was used when researching METAR
 * [Federal Meteorological Handbook No. 1 - Surface Weather Observations and Reports](http://www.ofcm.gov/fmh-1/fmh1.htm)
 * [Metar codes by Richard Ogley](http://www.astro.keele.ac.uk/oldusers/rno/Aviation/metar_codes.html)
 * [Meteorology @ West Moors - Metar decode](http://booty.org.uk/booty.weather/metinfo/codes/METAR_decode.htm)
-* Source code of [libgweather](http://ftp.gnome.org/pub/GNOME/sources/libgweather/)
+* Source code of [GWeather](http://ftp.gnome.org/pub/GNOME/sources/libgweather/)
 * Source code of [Metar](http://www.leune.org/metar/)
 
 # Copyright and licensing
