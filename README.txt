@@ -45,7 +45,7 @@
        Observations and Reports
      * [10]Metar codes by Richard Ogley
      * [11]Meteorology @ West Moors - Metar decode
-     * Source code of [12]libgweather
+     * Source code of [12]GWeather
      * Source code of [13]Metar
 
                             Copyright and licensing
