@@ -18,13 +18,9 @@
                                   Downloading
 
    METAR parser home page is at [6]http://solitudo.net/software/lua/metar/
-   and it can be downloaded from the public Git repository at
+   and it can be downloaded by cloning the public Git repository at
    git://scm.solitudo.net/metar.git. Gitweb interface is available at
    [7]http://scm.solitudo.net/gitweb/public/metar.git.
-
-   Remember to download the submodules after cloning metar.git.
-    1. $ git submodule init
-    2. $ git submodule update
 
                                   Installation
 
