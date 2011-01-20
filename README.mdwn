@@ -13,6 +13,8 @@ the weather reports are silently dropped.
 
 [LuaSocket](http://www.cs.princeton.edu/~diego/professional/luasocket/) is
 required for fetching weather reports from the [Internet Weather Service](http://weather.noaa.gov).
+On Debian/Ubuntu systems you can install the package `liblua5.1-socket2`
+in order to get LuaSocket installed.
 
 My [Lua weather library](http://solitudo.net/software/lua/weatherlib/) is
 required for doing some unit conversions.
