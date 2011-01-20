@@ -21,14 +21,9 @@ required for doing some unit conversions.
 
 METAR parser home page is at
 <http://solitudo.net/software/lua/metar/> and it can be downloaded
-from the public Git repository at `git://scm.solitudo.net/metar.git`.
+by cloning the public Git repository at `git://scm.solitudo.net/metar.git`.
 Gitweb interface is available at
 <http://scm.solitudo.net/gitweb/public/metar.git>.
-
-Remember to download the submodules after cloning `metar.git`.
-
-1. $ `git submodule init`
-1. $ `git submodule update`
 
 # Installation
 
