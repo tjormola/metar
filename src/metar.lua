@@ -464,7 +464,9 @@ end
 
 local function parse_metar_temperature(temperature, dewpoint)
 	temperature = temperature:gsub('^M', '-')
+	temperature = temperature:gsub('^-0+$', '0')
 	dewpoint = dewpoint:gsub('^M', '-')
+	dewpoint = dewpoint:gsub('^-0+$', '0')
 	return { temperature = tonumber(temperature), dewpoint = tonumber(dewpoint) }
 end
 
