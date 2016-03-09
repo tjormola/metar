@@ -47,7 +47,7 @@
 
                             Copyright and licensing
 
-   Copyright: © 2011 Tuomas Jormola [14]tj@solitudo.net
+   Copyright: © 2011-2016 Tuomas Jormola [14]tj@solitudo.net
    [15]http://solitudo.net
 
    Licensed under the terms of the [16]GNU General Public License Version
