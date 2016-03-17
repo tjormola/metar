@@ -345,7 +345,7 @@ local function parse_metar_visibility(visibility, direction)
 end
 
 local function parse_metar_runway_visual_range(runway, visibility)
-    return { runway_visual_range = { runway = tonumber(runway), visibility = tonumber(visibility) } } 
+    return { runway_visual_range = { runway = tonumber(runway), visibility = tonumber(visibility) } }
 end
 
 local function parse_metar_clouds(coverage, altitude, type)
@@ -594,7 +594,7 @@ end
 
 -------------------------------------------------------------------------------
 -- Return parsed METAR data as a table
--- @return Table containing the data parsed from the METAR data. 
+-- @return Table containing the data parsed from the METAR data.
 -- If an error occurs, returns nil as the first return value.
 -- The table may contain following entries
 -- <ul>
