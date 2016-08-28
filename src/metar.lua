@@ -724,7 +724,7 @@ end
 
 -- Download the METAR data for a weather station from IWS
 function metatable.__index:_download_metar_file(station_id)
-    local metar_url = string.format('http://weather.noaa.gov/pub/data/observations/metar/stations/%s.TXT', station_id)
+    local metar_url = string.format('https://www.aviationweather.gov/metar/data?ids=%s&format=raw&date=0&hours=0', station_id)
     local body, status, _, status_string = socket_http.request(metar_url)
     local error_details
     if not status or (type(status) ~= 'number' and type(status) ~= 'string') then
